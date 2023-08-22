@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/musa/c++_pro/tile_editor/build",
+  "command": "/usr/bin/c++  -I/usr/include/SDL2 -I/home/musa/c++_pro/tile_editor/include -std=gnu++11 -o CMakeFiles/editor.dir/src/main.cpp.o -c /home/musa/c++_pro/tile_editor/src/main.cpp",
+  "file": "/home/musa/c++_pro/tile_editor/src/main.cpp"
+},
+{
+  "directory": "/home/musa/c++_pro/tile_editor/build",
+  "command": "/usr/bin/c++  -I/usr/include/SDL2 -I/home/musa/c++_pro/tile_editor/include -std=gnu++11 -o CMakeFiles/editor.dir/src/tile_file.cpp.o -c /home/musa/c++_pro/tile_editor/src/tile_file.cpp",
+  "file": "/home/musa/c++_pro/tile_editor/src/tile_file.cpp"
+}
+]
