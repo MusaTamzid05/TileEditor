@@ -4,11 +4,14 @@
 
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "component.h"
 
-struct TileFile {
+struct TileFile : Component {
     TileFile(const std::string& path);
 
-    void draw(sf::RenderWindow& window);
+    void render(sf::RenderWindow& window);
+    void update();
+    void handle_event(sf::Event& event);
 
     void crop(const sf::Vector2f start_point, const sf::Vector2f end_point);
 

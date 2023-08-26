@@ -9,10 +9,11 @@
 int main(int argc, char** argv) {
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Title Editor");
-    TileFile tile_file("TilesetHouse.png");
+    TileFile* tile_file = new TileFile("TilesetHouse.png");
 
     std::vector<Component*> components;
-    components.push_back(new CropComponent(&window));
+    components.push_back(new CropComponent(&window, tile_file));
+    components.push_back(tile_file);
 
 
     while(window.isOpen()) {
@@ -37,7 +38,6 @@ int main(int argc, char** argv) {
 
 
         window.clear();
-        tile_file.draw(window);
 
         for(Component* component : components)
             component->render(window);

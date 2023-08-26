@@ -15,7 +15,7 @@ TileFile::TileFile(const std::string& path) {
 
 }
 
-void TileFile::draw(sf::RenderWindow& window) {
+void TileFile::render(sf::RenderWindow& window) {
     window.draw(sprite);
 
 
@@ -23,6 +23,13 @@ void TileFile::draw(sf::RenderWindow& window) {
         window.draw(crop_sprite);
 
     }
+}
+
+void TileFile::update() {
+}
+
+void TileFile::handle_event(sf::Event& event) {
+
 }
 
 void TileFile::crop(const sf::Vector2f start_point, const sf::Vector2f end_point) {
