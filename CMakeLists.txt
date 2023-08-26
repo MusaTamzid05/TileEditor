@@ -12,6 +12,7 @@ include_directories(
 set(SOURCE_FILES
     src/main.cpp
     src/tile_file.cpp
+    src/crop_component.cpp
 )
 
 add_executable(editor ${SOURCE_FILES})
