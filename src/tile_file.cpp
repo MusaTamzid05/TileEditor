@@ -34,7 +34,6 @@ void TileFile::handle_event(sf::Event& event) {
 
 void TileFile::crop(const sf::Vector2f start_point, const sf::Vector2f end_point) {
 
-    std::cout << start_point.x << " " << start_point.y << " " << end_point.x - start_point.x << " " << end_point.y - start_point.y << "\n";
     sf::IntRect crop_rect(
             static_cast<int>(start_point.x),
             static_cast<int>(start_point.y),
@@ -42,8 +41,8 @@ void TileFile::crop(const sf::Vector2f start_point, const sf::Vector2f end_point
             static_cast<int>(end_point.y - start_point.y)
             );
 
-    crop_texture.loadFromImage(texture.copyToImage(), crop_rect);
-    crop_sprite.setTexture(crop_texture);
+    crop_sprite.setTexture(texture);
+    crop_sprite.setTextureRect(crop_rect);
     crop_sprite.setPosition(1500, 100);
     crop_image_selected = true;
 

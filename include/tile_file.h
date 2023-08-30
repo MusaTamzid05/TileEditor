@@ -18,7 +18,6 @@ struct TileFile : Component {
     sf::Texture texture;
     sf::Sprite sprite;
 
-    sf::Texture crop_texture;
     sf::Sprite crop_sprite;
 
     bool crop_image_selected;
