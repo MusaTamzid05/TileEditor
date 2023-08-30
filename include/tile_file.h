@@ -20,9 +20,7 @@ struct TileFile : Component {
     sf::Sprite sprite;
     TileSelector* tile_selector;
 
-    sf::Sprite crop_sprite;
 
-    bool crop_image_selected;
 
 };
 

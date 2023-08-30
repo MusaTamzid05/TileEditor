@@ -13,7 +13,6 @@ TileFile::TileFile(const std::string& path, TileSelector* tile_selector) {
 
     sprite.setTexture(texture);
     sprite.setPosition(0, 0);
-    crop_image_selected = false;
 
 }
 
@@ -21,10 +20,6 @@ void TileFile::render(sf::RenderWindow& window) {
     window.draw(sprite);
 
 
-    if(crop_image_selected) {
-        window.draw(crop_sprite);
-
-    }
 }
 
 void TileFile::update() {
@@ -46,10 +41,10 @@ void TileFile::crop(const sf::Vector2f start_point, const sf::Vector2f end_point
             static_cast<int>(height)
             );
 
+    sf::Sprite crop_sprite;
+
     crop_sprite.setTexture(texture);
     crop_sprite.setTextureRect(crop_rect);
-    crop_sprite.setPosition(1500, 100);
-    crop_image_selected = true;
 
     tile_selector->add(crop_sprite, width, height);
 
