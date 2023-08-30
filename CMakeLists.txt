@@ -13,6 +13,7 @@ set(SOURCE_FILES
     src/main.cpp
     src/tile_file.cpp
     src/crop_component.cpp
+    src/tile_selector.cpp
 )
 
 add_executable(editor ${SOURCE_FILES})

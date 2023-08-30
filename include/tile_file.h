@@ -5,9 +5,10 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "component.h"
+#include "tile_selector.h"
 
 struct TileFile : Component {
-    TileFile(const std::string& path);
+    TileFile(const std::string& path, TileSelector* tile_selector);
 
     void render(sf::RenderWindow& window);
     void update();
@@ -17,6 +18,7 @@ struct TileFile : Component {
 
     sf::Texture texture;
     sf::Sprite sprite;
+    TileSelector* tile_selector;
 
     sf::Sprite crop_sprite;
 

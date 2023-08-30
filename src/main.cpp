@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "tile_file.h"
+#include "tile_selector.h"
 #include "crop_component.h"
 
 
@@ -8,12 +9,18 @@
 
 int main(int argc, char** argv) {
 
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Title Editor");
-    TileFile* tile_file = new TileFile("TilesetHouse.png");
+    int width = 1920;
+    int height = 1080;
+
+    sf::RenderWindow window(sf::VideoMode(width, height), "Title Editor");
+
+    TileSelector* tile_selector = new TileSelector(height / 2);
+    TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
 
     std::vector<Component*> components;
     components.push_back(new CropComponent(&window, tile_file));
     components.push_back(tile_file);
+    components.push_back(tile_selector);
 
 
     while(window.isOpen()) {
