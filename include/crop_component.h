@@ -20,6 +20,8 @@ struct CropComponent : public  Component {
     sf::RenderWindow* window;
     TileFile* tile_file;
 
+    int click_count;
+
 };
 
 
