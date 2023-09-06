@@ -46,7 +46,6 @@ void TileFile::crop(const sf::Vector2f start_point, const sf::Vector2f end_point
     crop_sprite.setTexture(texture);
     crop_sprite.setTextureRect(crop_rect);
 
-    tile_selector->add(crop_sprite, width, height);
 
 
 }

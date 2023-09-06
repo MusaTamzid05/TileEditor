@@ -17,6 +17,8 @@ struct TileSelectorItem : Component {
     void update();
     void handle_event(sf::Event& event);
 
+    void set_color(const sf::Color& color);
+
 
     int x;
     int y;
@@ -31,13 +33,18 @@ struct TileSelectorItem : Component {
 
 struct TileSelector : Component {
 
-    TileSelector(int tile_width, int tile_height, int texture_width, int texture_height);
+    TileSelector(int tile_width,
+            int tile_height,
+            int texture_width,
+            int texture_height,
+            sf::RenderWindow* window
+            );
 
     void render(sf::RenderWindow& window);
     void update();
     void handle_event(sf::Event& event);
 
-    void add(sf::Sprite& sprite, int width, int height);
+    void highlight();
 
 
     std::vector<TileSelectorItem> items;
@@ -46,6 +53,15 @@ struct TileSelector : Component {
     int tile_height;;
     int texture_width;
     int texture_height;
+
+    sf::Color selected_color;
+
+
+    sf::Vector2f select_start_point;
+    sf::Vector2f select_end_point;
+
+    bool selection_on;
+    sf::RenderWindow* window;
 
 };
 

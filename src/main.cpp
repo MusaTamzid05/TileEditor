@@ -26,12 +26,11 @@ int main(int argc, char** argv) {
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Title Editor");
 
-    TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height);
+    TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height, &window);
     TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
 
 
     std::vector<Component*> components;
-    components.push_back(new CropComponent(&window, tile_file));
     components.push_back(tile_file);
     components.push_back(tile_selector);
 
