@@ -4,18 +4,31 @@
 #include "tile_selector.h"
 #include "crop_component.h"
 
-
 #include <iostream>
+#include <cstdlib>
+
 
 int main(int argc, char** argv) {
+
+    std::cout << argc << "\n";
+
+    int tile_width = 16;
+    int tile_height = 16;
+
+    if(argc == 3) {
+        tile_width = atoi(argv[1]);
+        tile_height = atoi(argv[2]);
+    }
+
 
     int width = 1920;
     int height = 1080;
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Title Editor");
 
-    TileSelector* tile_selector = new TileSelector(height / 2);
+    TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height);
     TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
+
 
     std::vector<Component*> components;
     components.push_back(new CropComponent(&window, tile_file));
