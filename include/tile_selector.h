@@ -4,6 +4,8 @@
 #include "component.h"
 #include <vector>
 
+struct MouseSelectorComponent;
+
 struct TileSelectorItem : Component {
 
     TileSelectorItem(
@@ -45,6 +47,7 @@ struct TileSelector : Component {
     void handle_event(sf::Event& event);
 
     void highlight();
+    void update_mouse_selector();
 
 
     std::vector<TileSelectorItem> items;
@@ -62,6 +65,8 @@ struct TileSelector : Component {
 
     bool selection_on;
     sf::RenderWindow* window;
+
+    MouseSelectorComponent* mouse_selector_component;
 
 };
 

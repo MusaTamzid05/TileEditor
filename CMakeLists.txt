@@ -14,6 +14,7 @@ set(SOURCE_FILES
     src/tile_file.cpp
     src/crop_component.cpp
     src/tile_selector.cpp
+    src/mouse_selector_component.cpp
 )
 
 add_executable(editor ${SOURCE_FILES})

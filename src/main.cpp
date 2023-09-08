@@ -2,7 +2,7 @@
 #include <vector>
 #include "tile_file.h"
 #include "tile_selector.h"
-#include "crop_component.h"
+#include "mouse_selector_component.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -28,11 +28,14 @@ int main(int argc, char** argv) {
 
     TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height, &window);
     TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
+    MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width);
+    tile_selector->mouse_selector_component = mouse_selector_component;
 
 
     std::vector<Component*> components;
     components.push_back(tile_file);
     components.push_back(tile_selector);
+    components.push_back(mouse_selector_component);
 
 
     while(window.isOpen()) {

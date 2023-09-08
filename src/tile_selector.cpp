@@ -1,4 +1,5 @@
 #include "tile_selector.h"
+#include "mouse_selector_component.h"
 #include <iostream>
 #include <cmath>
 
@@ -90,8 +91,7 @@ void TileSelector::handle_event(sf::Event& event) {
     }
 
     else if(event.type == sf::Event::MouseButtonReleased) {
-        //select_end_point = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
-        //highlight();
+        update_mouse_selector();
         selection_on = false;
 
     }
@@ -127,5 +127,21 @@ void TileSelector::highlight() {
         }
 
     }
+
+}
+
+void TileSelector::update_mouse_selector() {
+    mouse_selector_component->items.clear();
+    std::cout << "Total " << mouse_selector_component->items.size() << "\n";
+
+    for(TileSelectorItem item : items) {
+        if(item.rect.getFillColor() != selected_color)
+            continue;
+
+        mouse_selector_component->add(item);
+
+    }
+
+    std::cout << "Total " << mouse_selector_component->items.size() << "\n";
 
 }
