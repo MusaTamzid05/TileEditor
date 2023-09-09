@@ -3,6 +3,7 @@
 #include "tile_file.h"
 #include "tile_selector.h"
 #include "mouse_selector_component.h"
+#include "output_canvas.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -28,6 +29,7 @@ int main(int argc, char** argv) {
 
     TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height, &window);
     TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
+    OutputCanvas* output_canvas = new OutputCanvas(width / 2, width, height, tile_width, tile_height);
     MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width);
     tile_selector->mouse_selector_component = mouse_selector_component;
 
@@ -36,6 +38,7 @@ int main(int argc, char** argv) {
     components.push_back(tile_file);
     components.push_back(tile_selector);
     components.push_back(mouse_selector_component);
+    components.push_back(output_canvas);
 
 
     while(window.isOpen()) {
