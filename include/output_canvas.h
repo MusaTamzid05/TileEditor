@@ -17,6 +17,8 @@ struct OutputCanvasItem {
 
     sf::RectangleShape rect;
 
+    bool is_hovered(const sf::Vector2i& mouse_position) const;
+
     int x;
     int y;
     int width;
@@ -34,6 +36,8 @@ struct OutputCanvas : Component {
     void render(sf::RenderWindow& window);
     void update();
     void handle_event(sf::Event& event);
+
+    sf::Vector2i get_hover_tile_position(const sf::Vector2i& mouse_pos);
 
     std::vector<OutputCanvasItem> items;
 };

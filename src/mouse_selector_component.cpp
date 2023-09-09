@@ -1,5 +1,6 @@
 #include "mouse_selector_component.h"
 #include "tile_selector.h"
+#include "output_canvas.h"
 #include <iostream>
 
 
@@ -36,7 +37,7 @@ void MouseSelectorItem::render(sf::RenderWindow* window) {
 
 
 
-MouseSelectorComponent::MouseSelectorComponent(const sf::Texture& texture, sf::RenderWindow* window, int width):texture(texture),half_width(width / 2), window(window) {
+MouseSelectorComponent::MouseSelectorComponent(const sf::Texture& texture, sf::RenderWindow* window, int width, OutputCanvas* output_canvas):texture(texture),half_width(width / 2), window(window), output_canvas(output_canvas) {
 
 }
 
@@ -57,13 +58,15 @@ void MouseSelectorComponent::render(sf::RenderWindow& window) {
 
 
 void MouseSelectorComponent::update() {
-    sf::Vector2i position = sf::Mouse::getPosition(*window);
+    sf::Vector2i mouse_position = sf::Mouse::getPosition(*window);
 
-    if(position.x < half_width)
+    if(mouse_position.x < half_width)
         return;
 
+    sf::Vector2i tile_position = output_canvas->get_hover_tile_position(mouse_position);
+
     for(MouseSelectorItem& item : items)
-        item.set_position(position.x, position.y);;
+        item.set_position(tile_position.x, tile_position.y);;
 }
 
 

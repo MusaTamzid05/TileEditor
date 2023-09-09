@@ -6,6 +6,7 @@
 #include <vector>
 
 struct TileSelectorItem;
+struct OutputCanvas;
 
 struct MouseSelectorItem {
 
@@ -30,7 +31,9 @@ struct MouseSelectorItem {
 
 
 struct MouseSelectorComponent : Component {
-    MouseSelectorComponent(const sf::Texture& texture, sf::RenderWindow* window, int width);
+    MouseSelectorComponent(const sf::Texture& texture, sf::RenderWindow* window, int width,
+            OutputCanvas* output_canvas
+            );
 
     void render(sf::RenderWindow& window);
     void update();
@@ -47,8 +50,8 @@ struct MouseSelectorComponent : Component {
     std::vector<MouseSelectorItem> items;
 
     int half_width;
-
     sf::RenderWindow* window;
+    OutputCanvas* output_canvas;
 
 
 

@@ -6,7 +6,11 @@ OutputCanvasItem::OutputCanvasItem(
         int y,
         int width,
         int height
-        ) {
+        ):
+    x(x),
+    y(y),
+    width(width),
+    height(height) {
 
         rect.setFillColor(sf::Color(0, 0, 0, 0));
         rect.setOutlineThickness(0.5f);
@@ -19,6 +23,26 @@ OutputCanvasItem::OutputCanvasItem(
 
 void OutputCanvasItem::render(sf::RenderWindow& window) {
     window.draw(rect);
+}
+
+
+bool OutputCanvasItem::is_hovered(const sf::Vector2i& mouse_position) const {
+    int min_x = x;
+    int min_y = y;
+    int max_x = min_x + width;
+    int max_y = min_y + height;
+
+    int mouse_x = mouse_position.x;
+    int mouse_y = mouse_position.y;
+
+
+    bool x_axis = mouse_x >= min_x && mouse_x <= max_x;
+    bool y_axis = mouse_y >= min_y && mouse_y <= max_y;
+
+    return x_axis && y_axis;
+
+
+
 }
 
 OutputCanvas::OutputCanvas(
@@ -50,5 +74,18 @@ void OutputCanvas::update() {
 }
 
 void OutputCanvas::handle_event(sf::Event& event) {
+
+}
+
+
+sf::Vector2i OutputCanvas::get_hover_tile_position(const sf::Vector2i& mouse_pos) {
+    for(OutputCanvasItem item : items) {
+        if(item.is_hovered(mouse_pos))
+            return sf::Vector2i(item.x, item.y);
+
+
+    }
+
+    return sf::Vector2i(0, 0);
 
 }

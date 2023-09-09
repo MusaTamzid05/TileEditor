@@ -132,7 +132,6 @@ void TileSelector::highlight() {
 
 void TileSelector::update_mouse_selector() {
     mouse_selector_component->items.clear();
-    std::cout << "Total " << mouse_selector_component->items.size() << "\n";
 
     for(TileSelectorItem item : items) {
         if(item.rect.getFillColor() != selected_color)
@@ -142,6 +141,5 @@ void TileSelector::update_mouse_selector() {
 
     }
 
-    std::cout << "Total " << mouse_selector_component->items.size() << "\n";
 
 }

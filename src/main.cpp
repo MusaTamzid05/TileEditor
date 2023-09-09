@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height, &window);
     TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
     OutputCanvas* output_canvas = new OutputCanvas(width / 2, width, height, tile_width, tile_height);
-    MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width);
+    MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width, output_canvas);
     tile_selector->mouse_selector_component = mouse_selector_component;
 
 
