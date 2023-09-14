@@ -58,19 +58,14 @@ void MouseSelectorComponent::render(sf::RenderWindow& window) {
 
 
 void MouseSelectorComponent::update() {
-    sf::Vector2i mouse_position = sf::Mouse::getPosition(*window);
+}
 
-    if(mouse_position.x < half_width)
-        return;
 
+void MouseSelectorComponent::handle_mouse_pos(const sf::Vector2i& mouse_position) {
     sf::Vector2i tile_position = output_canvas->get_hover_tile_position(mouse_position);
 
     for(MouseSelectorItem& item : items)
         item.set_position(tile_position.x, tile_position.y);;
-}
-
-
-void MouseSelectorComponent::handle_event(sf::Event& event) {
 
 }
 

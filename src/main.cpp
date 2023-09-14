@@ -4,6 +4,7 @@
 #include "tile_selector.h"
 #include "mouse_selector_component.h"
 #include "output_canvas.h"
+#include "input_component.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -33,12 +34,20 @@ int main(int argc, char** argv) {
     MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width, output_canvas);
     tile_selector->mouse_selector_component = mouse_selector_component;
 
+    InputComponent* input_component = new InputComponent(
+            &window,
+            width,
+            tile_selector,
+            mouse_selector_component
+            );
+
 
     std::vector<Component*> components;
     components.push_back(tile_file);
     components.push_back(tile_selector);
     components.push_back(mouse_selector_component);
     components.push_back(output_canvas);
+    components.push_back(input_component);
 
 
     while(window.isOpen()) {
@@ -55,8 +64,6 @@ int main(int argc, char** argv) {
             if(event.type == sf::Event::Closed)
                 window.close();
 
-            for(Component* component : components)
-                component->handle_event(event);
 
 
         }

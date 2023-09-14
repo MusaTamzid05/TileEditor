@@ -46,6 +46,9 @@ struct TileSelector : Component {
     void update();
     void handle_event(sf::Event& event);
 
+    void handle_mouse_pressed(const sf::Event& event);
+    void handle_mouse_release();
+
     void highlight();
     void update_mouse_selector();
 

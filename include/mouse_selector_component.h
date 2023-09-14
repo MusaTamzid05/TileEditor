@@ -37,7 +37,7 @@ struct MouseSelectorComponent : Component {
 
     void render(sf::RenderWindow& window);
     void update();
-    void handle_event(sf::Event& event);
+    void handle_mouse_pos(const sf::Vector2i& mouse_position);
 
 
     void add(const TileSelectorItem& item);

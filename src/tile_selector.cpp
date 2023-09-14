@@ -83,7 +83,19 @@ void TileSelector::update() {
 
 }
 
+void TileSelector::handle_mouse_pressed(const sf::Event& event) {
+    select_start_point = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
+    selection_on = true;
+}
+
+void TileSelector::handle_mouse_release() {
+        update_mouse_selector();
+        selection_on = false;
+
+}
+
 void TileSelector::handle_event(sf::Event& event) {
+    /*
     if(event.type == sf::Event::MouseButtonPressed) {
         select_start_point = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
         selection_on = true;
@@ -95,6 +107,7 @@ void TileSelector::handle_event(sf::Event& event) {
         selection_on = false;
 
     }
+    */
 
 }
 
