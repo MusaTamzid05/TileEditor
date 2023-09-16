@@ -4,13 +4,16 @@
 #include "component.h"
 #include <vector>
 
+struct TileSelectorItem;
+
 struct OutputCanvasItem {
 
     OutputCanvasItem(
             int x,
             int y,
             int width,
-            int height
+            int height,
+            TileSelectorItem* original_tile=nullptr
             );
 
     void render(sf::RenderWindow& window);
@@ -19,10 +22,15 @@ struct OutputCanvasItem {
 
     bool is_hovered(const sf::Vector2i& mouse_position) const;
 
+    void set_tile(TileSelectorItem* original_tile, const sf::Sprite& mouse_selected_sprite);
+
     int x;
     int y;
     int width;
     int height;
+
+    sf::Sprite sprite;
+    TileSelectorItem* original_tile;
 };
 
 struct OutputCanvas : Component {
@@ -39,7 +47,7 @@ struct OutputCanvas : Component {
 
     sf::Vector2i get_hover_tile_position(const sf::Vector2i& mouse_pos);
 
-    std::vector<OutputCanvasItem> items;
+    std::map<std::string, OutputCanvasItem*> items;
 };
 
 

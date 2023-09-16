@@ -12,7 +12,8 @@ struct TileSelectorItem : Component {
             int x,
             int y,
             int width,
-            int height
+            int height,
+            int id
             );
 
     void render(sf::RenderWindow& window);
@@ -26,6 +27,8 @@ struct TileSelectorItem : Component {
     int y;
     int width;
     int height;
+
+    int id;
 
     sf::RectangleShape rect;
 

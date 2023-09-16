@@ -14,7 +14,9 @@ struct MouseSelectorItem {
             const sf::IntRect& rect,
             const sf::Texture& texture,
             int offset_x,
-            int offset_y);
+            int offset_y,
+            TileSelectorItem* original_tile
+            );
 
     int offset_x;
     int offset_y;
@@ -25,8 +27,11 @@ struct MouseSelectorItem {
     sf::Sprite sprite;
     sf::IntRect rect;
 
+
     int x;
     int y;
+
+    TileSelectorItem* original_tile;
 };
 
 
@@ -40,7 +45,9 @@ struct MouseSelectorComponent : Component {
     void handle_mouse_pos(const sf::Vector2i& mouse_position);
 
 
-    void add(const TileSelectorItem& item);
+
+    void add(TileSelectorItem& item);
+    void update_output_canvas();
 
     sf::Texture texture;
 

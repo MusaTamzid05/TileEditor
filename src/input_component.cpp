@@ -28,10 +28,16 @@ void InputComponent::update() {
             if(event.type == sf::Event::MouseButtonPressed) {
                 tile_selector->handle_mouse_pressed(event);
 
+                if(mouse_position.x >  screen_width / 2) {
+                    mouse_selector_component->update_output_canvas();
+
+                }
+
             }
 
             else if(event.type == sf::Event::MouseButtonReleased) {
                 tile_selector->handle_mouse_release();
+
             }
 
     }

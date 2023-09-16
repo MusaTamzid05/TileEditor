@@ -11,9 +11,6 @@
 
 
 int main(int argc, char** argv) {
-
-    std::cout << argc << "\n";
-
     int tile_width = 16;
     int tile_height = 16;
 

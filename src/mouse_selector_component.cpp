@@ -1,6 +1,7 @@
 #include "mouse_selector_component.h"
 #include "tile_selector.h"
 #include "output_canvas.h"
+#include "util.h"
 #include <iostream>
 
 
@@ -8,7 +9,9 @@ MouseSelectorItem::MouseSelectorItem(
         const sf::IntRect& rect,
         const sf::Texture& texture,
         int offset_x,
-        int offset_y):
+        int offset_y,
+        TileSelectorItem* original_tile
+        ):
     offset_x(offset_x),
     offset_y(offset_y),
     x(0),
@@ -34,6 +37,7 @@ void MouseSelectorItem::render(sf::RenderWindow* window) {
     window->draw(sprite);
 
 }
+
 
 
 
@@ -70,7 +74,7 @@ void MouseSelectorComponent::handle_mouse_pos(const sf::Vector2i& mouse_position
 }
 
 
-void MouseSelectorComponent::add(const TileSelectorItem& item) {
+void MouseSelectorComponent::add(TileSelectorItem& item) {
 
     if(items.size() == 0 ) {
         start_x = item.x;
@@ -82,8 +86,26 @@ void MouseSelectorComponent::add(const TileSelectorItem& item) {
 
     sf::IntRect rect(item.x, item.y, item.width, item.height);
 
-    MouseSelectorItem mouse_selected_item(rect, texture, offset_x, offset_y);
+    MouseSelectorItem mouse_selected_item(rect, texture, offset_x, offset_y, &item);
     items.push_back(mouse_selected_item);
 
 
 }
+
+void MouseSelectorComponent::update_output_canvas() {
+
+    for(auto item : items) {
+        int x = item.x;
+        int y = item.y;
+
+        std::string key = get_position_key(x, y);
+
+        OutputCanvasItem* output_tile = output_canvas->items[key];
+        output_tile->set_tile(item.original_tile, item.sprite);
+
+
+
+    }
+
+}
+

@@ -7,11 +7,15 @@ TileSelectorItem::TileSelectorItem(
         int x,
         int y,
         int width,
-        int height):
+        int height,
+        int id
+        ):
     x(x),
     y(y),
     width(width),
-    height(height) {
+    height(height),
+    id(id)
+{
 
         rect.setFillColor(sf::Color(0, 0, 0, 0));
         rect.setOutlineThickness(0.5f);
@@ -49,12 +53,14 @@ TileSelector::TileSelector(int tile_width, int tile_height, int texture_width, i
     window(window)
 {
         selected_color = sf::Color(255, 0, 0, 100);
+        int id = 0;
 
 
         for(int y = 0; y < texture_height; y += tile_height) {
             for(int x = 0; x < texture_width; x += tile_width) {
-                TileSelectorItem item = TileSelectorItem(x, y, tile_width, tile_height);
+                TileSelectorItem item = TileSelectorItem(x, y, tile_width, tile_height, id);
                 items.push_back(item);
+                id += 1;
 
             }
         }
