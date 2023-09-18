@@ -1,4 +1,5 @@
 #include "tile_selector.h"
+#include "cell.h"
 #include "mouse_selector_component.h"
 #include <iostream>
 #include <cmath>
@@ -60,6 +61,12 @@ TileSelector::TileSelector(int tile_width, int tile_height, int texture_width, i
             for(int x = 0; x < texture_width; x += tile_width) {
                 TileSelectorItem item = TileSelectorItem(x, y, tile_width, tile_height, id);
                 items.push_back(item);
+
+                Cell* cell = new Cell(x, y, tile_width, tile_height, id);
+                cell->set_color(sf::Color(0, 0, 0, 0));
+                cell->set_border_color(sf::Color(255, 0, 0, 100));
+                cells.push_back(cell);
+
                 id += 1;
 
             }
@@ -72,8 +79,13 @@ TileSelector::TileSelector(int tile_width, int tile_height, int texture_width, i
 
 
 void TileSelector::render(sf::RenderWindow& window) {
-    for(TileSelectorItem item : items)
-        item.render(window);
+    //for(TileSelectorItem item : items)
+        //item.render(window);
+        //
+
+    for(Cell* cell : cells) {
+        cell->render(&window);
+    }
 
 
 }
@@ -125,23 +137,23 @@ void TileSelector::highlight() {
     float max_y = select_start_point.y + fabs(select_end_point.y - select_start_point.y);
 
 
-    for(TileSelectorItem& item : items) {
+    for(Cell* cell: cells) {
 
-        int item_max_x = item.x + item.width;
-        int item_max_y = item.y + item.height;
+        int item_max_x = cell->x + cell->width;
+        int item_max_y = cell->y + cell->height;
 
-        int item_center_x = item.x + (item.width / 2);
-        int item_center_y = item.y + (item.height/ 2);
+        int item_center_x = cell->x + (cell->width / 2);
+        int item_center_y = cell->y + (cell->height/ 2);
 
         bool x_axis_collider =  item_center_x >= min_x && item_center_x <= max_x;
         bool y_axis_collider =  item_center_y >= min_y && item_center_y <= max_y;
 
 
         if(x_axis_collider && y_axis_collider) {
-            item.set_color(selected_color);
+            cell->set_color(selected_color);
         } 
         else {
-            item.set_color(sf::Color(0, 0, 0, 0));
+            cell->set_color(sf::Color(0, 0, 0, 0));
 
         }
 

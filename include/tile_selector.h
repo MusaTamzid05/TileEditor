@@ -5,6 +5,7 @@
 #include <vector>
 
 struct MouseSelectorComponent;
+struct Cell;
 
 struct TileSelectorItem : Component {
 
@@ -57,6 +58,7 @@ struct TileSelector : Component {
 
 
     std::vector<TileSelectorItem> items;
+    std::vector<Cell*> cells;
 
     int tile_width;
     int tile_height;;

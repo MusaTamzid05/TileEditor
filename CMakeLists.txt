@@ -18,6 +18,7 @@ set(SOURCE_FILES
     src/output_canvas.cpp
     src/input_component.cpp
     src/util.cpp
+    src/cell.cpp
 )
 
 add_executable(editor ${SOURCE_FILES})
