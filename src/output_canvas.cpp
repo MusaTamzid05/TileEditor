@@ -1,6 +1,7 @@
 #include "output_canvas.h"
 #include "tile_selector.h"
 #include "util.h"
+#include "cell.h"
 
 
 OutputCanvasItem::OutputCanvasItem(
@@ -72,8 +73,13 @@ OutputCanvas::OutputCanvas(
     for(int y = 0; y < total_height; y += tile_height) {
         for(int x = start_point ; x < total_width; x += tile_width) {
             std::string key = get_position_key(x, y);
-            //items.push_back(OutputCanvasItem(x, y, tile_width, tile_height));
-            items[key] = new OutputCanvasItem(x, y, tile_width, tile_height);
+            Cell* cell = new Cell(x, y, tile_width, tile_height);
+
+            cell->set_color(sf::Color(0, 0, 0, 0));
+            cell->set_border_color(sf::Color(0, 255, 0, 100));
+
+            //cell_map.insert(key, cell);
+            cell_map[key] = cell;
             //items.insert(key, OutputCanvasItem(x, y, tile_width, tile_height));
         }
 
@@ -83,8 +89,8 @@ OutputCanvas::OutputCanvas(
 
 
 void OutputCanvas::render(sf::RenderWindow& window) {
-    for(auto item : items) {
-        item.second->render(window);
+    for(auto cell_item : cell_map) {
+        cell_item.second->render(&window);
 
     }
 
@@ -97,11 +103,28 @@ void OutputCanvas::handle_event(sf::Event& event) {
 
 }
 
+bool OutputCanvas::is_hovered(const sf::Vector2i& mouse_position, Cell* cell) const {
+    int min_x = cell->x;
+    int min_y = cell->y;
+    int max_x = min_x + cell->width;
+    int max_y = min_y + cell->height;
+
+    int mouse_x = mouse_position.x;
+    int mouse_y = mouse_position.y;
+
+
+    bool x_axis = mouse_x >= min_x && mouse_x <= max_x;
+    bool y_axis = mouse_y >= min_y && mouse_y <= max_y;
+
+    return x_axis && y_axis;
+
+}
+
 
 sf::Vector2i OutputCanvas::get_hover_tile_position(const sf::Vector2i& mouse_pos) {
-    for(auto item : items) {
-        if(item.second->is_hovered(mouse_pos))
-            return sf::Vector2i(item.second->x, item.second->y);
+    for(auto cell_item : cell_map) {
+        if(is_hovered(mouse_pos, cell_item.second))
+            return sf::Vector2i(cell_item.second->x, cell_item.second->y);
 
 
     }

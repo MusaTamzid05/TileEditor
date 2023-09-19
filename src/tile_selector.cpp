@@ -59,8 +59,6 @@ TileSelector::TileSelector(int tile_width, int tile_height, int texture_width, i
 
         for(int y = 0; y < texture_height; y += tile_height) {
             for(int x = 0; x < texture_width; x += tile_width) {
-                TileSelectorItem item = TileSelectorItem(x, y, tile_width, tile_height, id);
-                items.push_back(item);
 
                 Cell* cell = new Cell(x, y, tile_width, tile_height, id);
                 cell->set_color(sf::Color(0, 0, 0, 0));
@@ -164,11 +162,11 @@ void TileSelector::highlight() {
 void TileSelector::update_mouse_selector() {
     mouse_selector_component->items.clear();
 
-    for(TileSelectorItem item : items) {
-        if(item.rect.getFillColor() != selected_color)
+    for(Cell* cell : cells) {
+        if(cell->rect.getFillColor() != selected_color)
             continue;
 
-        mouse_selector_component->add(item);
+        mouse_selector_component->add(cell);
 
     }
 

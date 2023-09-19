@@ -6,6 +6,7 @@
 #include <vector>
 
 struct TileSelectorItem;
+struct Cell;
 struct OutputCanvas;
 
 struct MouseSelectorItem {
@@ -15,7 +16,7 @@ struct MouseSelectorItem {
             const sf::Texture& texture,
             int offset_x,
             int offset_y,
-            TileSelectorItem* original_tile
+            Cell* cell
             );
 
     int offset_x;
@@ -31,7 +32,7 @@ struct MouseSelectorItem {
     int x;
     int y;
 
-    TileSelectorItem* original_tile;
+    Cell* cell;
 };
 
 
@@ -46,7 +47,7 @@ struct MouseSelectorComponent : Component {
 
 
 
-    void add(TileSelectorItem& item);
+    void add(Cell* cell);
     void update_output_canvas();
 
     sf::Texture texture;

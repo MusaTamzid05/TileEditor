@@ -57,7 +57,6 @@ struct TileSelector : Component {
     void update_mouse_selector();
 
 
-    std::vector<TileSelectorItem> items;
     std::vector<Cell*> cells;
 
     int tile_width;

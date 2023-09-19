@@ -5,6 +5,7 @@
 #include <vector>
 
 struct TileSelectorItem;
+struct Cell;
 
 struct OutputCanvasItem {
 
@@ -45,9 +46,11 @@ struct OutputCanvas : Component {
     void update();
     void handle_event(sf::Event& event);
 
+    bool is_hovered(const sf::Vector2i& mouse_position, Cell* cell) const;
+
     sf::Vector2i get_hover_tile_position(const sf::Vector2i& mouse_pos);
 
-    std::map<std::string, OutputCanvasItem*> items;
+    std::map<std::string, Cell*> cell_map;
 };
 
 
