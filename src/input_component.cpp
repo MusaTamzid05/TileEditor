@@ -1,6 +1,7 @@
 #include "input_component.h"
 #include "tile_selector.h"
 #include "mouse_selector_component.h"
+#include "tile_io.h"
 
 InputComponent::InputComponent(sf::RenderWindow* window,
         int screen_width,
@@ -22,8 +23,10 @@ void InputComponent::update() {
     sf::Event event;
 
     while(window->pollEvent(event)) {
-            if(event.type == sf::Event::Closed)
+            if(event.type == sf::Event::Closed) {
                 window->close();
+
+            }
 
             if(event.type == sf::Event::MouseButtonPressed) {
                 tile_selector->handle_mouse_pressed(event);

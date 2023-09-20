@@ -49,7 +49,6 @@ struct OutputCanvas : Component {
     bool is_hovered(const sf::Vector2i& mouse_position, Cell* cell) const;
 
     sf::Vector2i get_hover_tile_position(const sf::Vector2i& mouse_pos);
-
     std::map<std::string, Cell*> cell_map;
 };
 

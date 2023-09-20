@@ -5,6 +5,7 @@
 #include "mouse_selector_component.h"
 #include "output_canvas.h"
 #include "input_component.h"
+#include "tile_io.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -28,7 +29,22 @@ int main(int argc, char** argv) {
     TileSelector* tile_selector = new TileSelector(tile_width, tile_height, width / 2, height, &window);
     TileFile* tile_file = new TileFile("TilesetHouse.png", tile_selector);
     OutputCanvas* output_canvas = new OutputCanvas(width / 2, width, height, tile_width, tile_height);
+
+    std::cout << "size " << output_canvas->cell_map.size() << "\n";
+
+
+
+
     MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width, output_canvas);
+
+    TileIO* tile_io = new TileIO(
+            "TilesetHouse.png", 
+            output_canvas,
+            width,
+            height,
+            tile_width,
+            tile_height);
+
     tile_selector->mouse_selector_component = mouse_selector_component;
 
     InputComponent* input_component = new InputComponent(
@@ -56,16 +72,6 @@ int main(int argc, char** argv) {
 
         sf::Event event;
 
-        while(window.pollEvent(event)) {
-
-            if(event.type == sf::Event::Closed)
-                window.close();
-
-
-
-        }
-
-
         window.clear();
 
         for(Component* component : components)
@@ -75,6 +81,9 @@ int main(int argc, char** argv) {
 
 
     }
+
+    std::cout << "save\n";
+    tile_io->save();
 
     return 0;
 }

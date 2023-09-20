@@ -87,6 +87,7 @@ void MouseSelectorComponent::add(Cell* cell) {
 
     sf::IntRect rect(cell->x, cell->y, cell->width, cell->height);
 
+
     MouseSelectorItem mouse_selected_item(rect, texture, offset_x, offset_y, cell);
     items.push_back(mouse_selected_item);
 
@@ -108,6 +109,7 @@ void MouseSelectorComponent::update_output_canvas() {
         
         sf::IntRect rect(original_cell->x, original_cell->y, original_cell->width, original_cell->height);
         output_cell->set_texture(texture, rect);
+        output_cell->id = original_cell->id;
 
 
 

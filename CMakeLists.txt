@@ -19,6 +19,7 @@ set(SOURCE_FILES
     src/input_component.cpp
     src/util.cpp
     src/cell.cpp
+    src/tile_io.cpp
 )
 
 add_executable(editor ${SOURCE_FILES})

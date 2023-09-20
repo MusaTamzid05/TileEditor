@@ -78,12 +78,11 @@ OutputCanvas::OutputCanvas(
             cell->set_color(sf::Color(0, 0, 0, 0));
             cell->set_border_color(sf::Color(0, 255, 0, 100));
 
-            //cell_map.insert(key, cell);
             cell_map[key] = cell;
-            //items.insert(key, OutputCanvasItem(x, y, tile_width, tile_height));
         }
 
     }
+
 
 }
 
