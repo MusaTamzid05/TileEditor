@@ -54,7 +54,6 @@ struct TileSelector : Component {
     void handle_mouse_release();
 
     void highlight();
-    void update_mouse_selector();
 
 
     std::vector<Cell*> cells;

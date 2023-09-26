@@ -1,9 +1,11 @@
 #include "cell.h"
 #include <iostream>
 
-Cell::Cell(int x, int y, int width, int height, int id):
+Cell::Cell(int x, int y, int row, int col,  int width, int height, int id):
     x(x),
     y(y),
+    row(row),
+    col(col),
     width(width),
     height(height),
     id(id) {

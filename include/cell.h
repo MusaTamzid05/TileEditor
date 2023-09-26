@@ -4,10 +4,14 @@
 #include <SFML/Graphics.hpp>
 
 struct Cell {
-    Cell(int x, int y, int width, int height, int id=-1);
+    Cell(int x, int y, int row, int col,  int width, int height, int id=-1);
 
     int x;
     int y;
+
+    int row;
+    int col;
+
     int width;
     int height;
     int id;

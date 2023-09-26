@@ -55,19 +55,25 @@ TileSelector::TileSelector(int tile_width, int tile_height, int texture_width, i
 {
         selected_color = sf::Color(255, 0, 0, 100);
         int id = 0;
+        int row = 0;
+        int col = 0;
 
 
         for(int y = 0; y < texture_height; y += tile_height) {
+            col = 0;
             for(int x = 0; x < texture_width; x += tile_width) {
 
-                Cell* cell = new Cell(x, y, tile_width, tile_height, id);
+                Cell* cell = new Cell(x, y, row, col,  tile_width, tile_height, id);
                 cell->set_color(sf::Color(0, 0, 0, 0));
                 cell->set_border_color(sf::Color(255, 0, 0, 100));
                 cells.push_back(cell);
 
                 id += 1;
+                col += 1;
 
             }
+
+            row += 1;
         }
 
 
@@ -105,7 +111,18 @@ void TileSelector::handle_mouse_pressed(const sf::Event& event) {
 }
 
 void TileSelector::handle_mouse_release() {
-        update_mouse_selector();
+
+        mouse_selector_component->items.clear();
+
+        for(Cell* cell : cells) {
+            if(cell->rect.getFillColor() != selected_color)
+                continue;
+
+            mouse_selector_component->add(cell);
+
+        }
+
+
         selection_on = false;
 
 }
@@ -159,16 +176,3 @@ void TileSelector::highlight() {
 
 }
 
-void TileSelector::update_mouse_selector() {
-    mouse_selector_component->items.clear();
-
-    for(Cell* cell : cells) {
-        if(cell->rect.getFillColor() != selected_color)
-            continue;
-
-        mouse_selector_component->add(cell);
-
-    }
-
-
-}

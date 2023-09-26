@@ -70,16 +70,23 @@ OutputCanvas::OutputCanvas(
         int tile_width,
         int tile_height) {
 
+    int row = 0;
+    int col = 0;
+
     for(int y = 0; y < total_height; y += tile_height) {
+        col = 0;
         for(int x = start_point ; x < total_width; x += tile_width) {
             std::string key = get_position_key(x, y);
-            Cell* cell = new Cell(x, y, tile_width, tile_height);
+            Cell* cell = new Cell(x, y, row, col, tile_width, tile_height);
 
             cell->set_color(sf::Color(0, 0, 0, 0));
             cell->set_border_color(sf::Color(0, 255, 0, 100));
 
             cell_map[key] = cell;
+            col += 1;
         }
+
+        row += 1;
 
     }
 
