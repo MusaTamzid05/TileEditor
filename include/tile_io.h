@@ -10,10 +10,11 @@ struct TileIO {
     TileIO(
             const std::string& tile_file_name,
             OutputCanvas* output_canvas,
-            int map_width,
-            int map_height,
+            int screen_width,
+            int screen_height,
             int tile_width,
-            int tile_height
+            int tile_height,
+            const std::string& output_file_name="result"
 
             );
 
@@ -22,11 +23,13 @@ struct TileIO {
     std::string tile_file_name;
     OutputCanvas* output_canvas;
 
-    int map_width;
-    int map_height;
+    int screen_width;
+    int screen_height;
 
     int tile_width;
     int tile_height;
+
+    std::string output_file_name;
 };
 
 #endif
