@@ -38,8 +38,10 @@ int main(int argc, char** argv) {
     MouseSelectorComponent* mouse_selector_component = new MouseSelectorComponent(tile_file->texture, &window, width, output_canvas);
 
     TileIO* tile_io = new TileIO(
-            "TilesetHouse.png", 
+            "result.data", 
             output_canvas,
+            tile_selector,
+            tile_file->texture,
             width,
             height,
             tile_width,
@@ -76,6 +78,7 @@ int main(int argc, char** argv) {
 
         for(Component* component : components)
             component->render(window);
+
         window.display();
 
 

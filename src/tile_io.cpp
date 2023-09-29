@@ -1,27 +1,76 @@
 #include "tile_io.h"
 #include "output_canvas.h"
+#include "tile_selector.h"
 #include "cell.h"
 #include <iostream>
 #include <fstream>
+#include "util.h"
 
 
 TileIO::TileIO(const std::string& tile_file_name, 
         OutputCanvas* output_canvas,
-            int screen_width,
-            int screen_height,
-            int tile_width,
-            int tile_height,
-            const std::string& output_file_name
-
+        TileSelector* tile_selector,
+        const sf::Texture& texture,
+        int screen_width,
+        int screen_height,
+        int tile_width,
+        int tile_height,
+        const std::string& output_file_name
         ):
     tile_file_name(tile_file_name), 
     output_canvas(output_canvas), 
+    tile_selector(tile_selector),
     screen_width(screen_width),
     screen_height(screen_height),
     tile_width(tile_width),
     tile_height(tile_height),
     output_file_name(output_file_name) {
-        std::cout << "Total - " << output_canvas->cell_map.size() << "\n";
+
+        this->texture = texture;
+
+        std::ifstream input_file(output_file_name + ".data");
+        std::string line;
+
+        int row = 0;
+        int col = 0;
+
+
+        while(std::getline(input_file, line)) {
+            col = 0;
+            std::vector<std::string> results = split_string(line, ',');
+
+            for(std::string item : results) {
+                if(item != "-1")  {
+                    for(auto cell_item : output_canvas->cell_map) {
+                        Cell* cell = cell_item.second;
+
+                        if(cell->row == row && cell->col == col) {
+
+                            for(Cell* tile_cell : tile_selector->cells) {
+                                if(tile_cell->row == row && tile_cell->col == col) {
+                                    sf::IntRect rect = sf::IntRect(
+                                            tile_cell->x,
+                                            tile_cell->y,
+                                            tile_cell->width,
+                                            tile_cell->height);
+
+                                    cell->set_texture(texture, rect);
+                                    cell->id = tile_cell->id;
+                                    std::cout << cell->sprite.getPosition().x << " " << cell->sprite.getPosition().y << "\n";
+
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+                col += 1;
+            }
+
+            row += 1;
+
+        }
 }
 
 void TileIO::save() {
@@ -123,3 +172,4 @@ void TileIO::save() {
 
 
 }
+
